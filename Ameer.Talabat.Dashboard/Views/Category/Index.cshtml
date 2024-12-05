@@ -1,0 +1,113 @@
+﻿@model IReadOnlyList<GetCategoriesVm>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+@if (Model.Any())
+{
+
+    <h1>All Categories</h1>
+
+    <span class="">Create new Category <a class="btn btn-outline-primary" asp-action="Create">Create</a></span>
+
+    @*   @if (TempData["AlertMessage"] != null)
+    {
+        @if ((string)TempData["AlertMessage"]! == "you are trying to delete the account thats currently logged in!")
+        {
+            <div class="alert alert-danger mt-1">
+                you are trying to delete the account thats currently logged in!
+            </div>
+        }
+        else @if ((string)TempData["AlertMessage"]! == "User deleted Succefuly")
+        {
+            <div class="alert alert-success mt-1">
+                User deleted Succefuly
+            </div>
+        }
+        else  @if ((string)TempData["AlertMessage"]! == "Unable to delete User with Admin Role")
+        {
+            <div class="alert alert-warning mt-1">
+                Unable to delete User with Admin  Role
+            </div>
+        }
+    } *@
+
+    <form class="mt-4">
+        <input type="text" class="rounded mb-2" id="Search" placeholder="Search...">
+
+        <label for="search-by">Search by:</label>
+        <select id="search-by">
+            <option value="1">Id</option>
+            <option value="2" selected>Name</option>
+        </select>
+
+    </form>
+
+    <table class="table table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="Search">
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td class="w-25">
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to check if text_two is in text_one
+            function Contains(text_one, text_two) {
+                return text_one.indexOf(text_two) != -1;
+            }
+
+            $("#Search").keyup(function () {
+                var searchText = $("#Search").val().toLowerCase();
+                var selectedValue = $("#search-by").val();
+                var columnSelector = "td:nth-child(" + selectedValue + ")";
+
+                $(".Search").each(function () {
+
+                    var searchBy = $(this).find(columnSelector).text().toLowerCase();
+
+                    if (!Contains(searchBy, searchText)) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
+
+}
+
+else
+{
+
+    <h2>No Categories Created Yet!</h2>
+
+    <span>Create new Category <a class="btn btn-outline-primary" asp-action="Create">Create</a></span>
+}
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

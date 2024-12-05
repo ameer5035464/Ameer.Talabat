@@ -1,0 +1,80 @@
+﻿@model CreateUserVM
+@inject RoleManager<IdentityRole> _roleManager;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link href="~/css/CreateUser.css" rel="stylesheet" />
+
+    <div class="container">
+        <!-- Title section -->
+        <div class="title">New User</div>   
+        <div class="content">
+            <!-- Registration form -->
+            <form method="post" asp-action="Create" asp-controller="Users">
+
+                  <div asp-validation-summary="ModelOnly"></div>
+ 
+                <div class="user-details">
+
+                    <div class="input-box">
+                        <span class="details">@Html.DisplayNameFor(u => u.FirstName)</span>
+                        <input asp-for="FirstName" type="text" placeholder="Enter first name">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">@Html.DisplayNameFor(u => u.LastName)</span>
+                    <input asp-for="LastName" type="text" placeholder="Enter last name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">@Html.DisplayNameFor(u => u.Email)</span>
+                    <input asp-for="Email" placeholder="Enter email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">@Html.DisplayNameFor(u => u.PhoneNumber)</span>
+                    <input asp-for="PhoneNumber" type="text" placeholder="Enter phone number">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">@Html.DisplayNameFor(u => u.Password)</span>
+                    <input asp-for="Password" type="password" placeholder="Enter password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">@Html.DisplayNameFor(u => u.ConfirmPassword)</span>
+                    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm password">
+                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div>
+                <div class="dropdown">
+                    <div class="dropdown-btn" >Select Roles</div>
+                    <div class="dropdown-content">
+
+                        @foreach (var item in ViewBag.MapList)
+                        {
+                            <label>
+                                <input type="checkbox" class="checkbox" name="selectedRoles" value="@item">
+                                @item
+                            </label>
+                        }
+                        
+                    </div>
+                </div>
+                </div>
+
+                <div class="button">
+                    <input type="submit">
+                </div>
+
+            </form>
+        </div>
+    </div>

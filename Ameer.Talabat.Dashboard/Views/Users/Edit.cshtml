@@ -1,0 +1,77 @@
+﻿@model EditUserVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+
+<link href="~/css/CreateUser.css" rel="stylesheet" />
+
+<div class="container">
+    <!-- Title section -->
+    <div class="title">Edit User</div>
+    <div class="content">
+        <!-- Registration form -->
+        <form method="post" asp-action="Edit" asp-controller="Users">
+           <input asp-for="Id" hidden/>
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="user-details">
+
+
+                <div class="input-box">
+                    <span class="details">@Html.DisplayNameFor(u => u.FirstName)</span>
+                    <input asp-for="FirstName" type="text" placeholder="Enter first name">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">@Html.DisplayNameFor(u => u.LastName)</span>
+                    <input asp-for="LastName" type="text" placeholder="Enter last name">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">@Html.DisplayNameFor(u => u.Email)</span>
+                    <input asp-for="Email" placeholder="Enter email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">@Html.DisplayNameFor(u => u.PhoneNumber)</span>
+                    <input asp-for="PhoneNumber" type="text" placeholder="Enter phone number">
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+
+            </div>
+
+            <div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">Select Roles</div>
+                    <div class="dropdown-content">
+                      
+                             @for (int i = 0; i < Model.Roles!.Count; i++)
+                        {
+                            <input asp-for="@Model.Roles[i].Name" hidden />
+                          
+                            <label asp-for="@Model.Roles[i]">
+                                <input asp-for="@Model.Roles[i].IsSelected" class="checkbox">
+                                @Model.Roles[i].Name
+                            </label>
+
+                        } 
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="button">
+                <input type="submit" value="Save">
+            </div>
+
+        </form>
+    </div>
+</div>

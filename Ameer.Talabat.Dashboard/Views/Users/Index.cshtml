@@ -1,0 +1,138 @@
+﻿@model IEnumerable<UserVM>
+@inject UserManager<ApplicationUser> _userManager;
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@if (Model.Any())
+{
+    <link href="~/css/pulse.css" rel="stylesheet" />
+    <h1>All Users</h1>
+
+    <span class="">Create new User <a class="btn btn-outline-primary" asp-action="Create">Create</a></span>
+
+    @if (TempData["AlertMessage"] != null)
+    {
+        @if ((string)TempData["AlertMessage"]! == "you are trying to delete the account thats currently logged in!")
+        {
+            <div class="alert alert-danger mt-1">
+                you are trying to delete the account thats currently logged in!
+            </div>
+        }
+       else @if ((string)TempData["AlertMessage"]! == "User deleted Succefuly")
+        {
+            <div class="alert alert-success mt-1">
+                User deleted Succefuly
+            </div>
+        }
+      else  @if ((string)TempData["AlertMessage"]! == "Unable to delete User with Admin Role")
+        {
+            <div class="alert alert-warning mt-1">
+                Unable to delete User with Admin  Role
+            </div>
+        }
+    }
+
+    <form class="mt-4">
+        <input type="text" class="rounded" id="Search" placeholder="Search...">
+
+        <label for="search-by">Search by:</label>
+        <select id="search-by">
+            <option value="2">Id</option>
+            <option value="3">First Name</option>
+            <option value="4">Last Name</option>
+            <option value="5" selected>Email</option>
+            <option value="6">Phone Number</option>
+            <option value="7">Role</option>
+        </select>
+
+    </form> 
+
+    <table class="table table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th></th>
+                <th>@Html.DisplayNameFor(r => r.Id)</th>
+                <th>@Html.DisplayNameFor(r => r.FirstName)</th>
+                <th>@Html.DisplayNameFor(r => r.LastName)</th>
+                <th>@Html.DisplayNameFor(r => r.Email)</th>
+                <th>@Html.DisplayNameFor(r => r.PhoneNumber)</th>
+                <th>@Html.DisplayNameFor(r => r.Roles)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="Search">
+                    @if (_userManager.GetUserAsync(User).Result!.Id == item.Id)
+                    {
+                        <td><div class="circle pulse green mt-2 ms-2"></div></td>
+                        <td>@item.Id</td>
+                    }
+                    else
+                    {
+                         <td></td>
+                         <td>@item.Id</td>
+                    }
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>
+                        @foreach (var role in item.Roles!)
+                        {
+                            <span class="text-nowrap">{@role}</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-controller="Users" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-outline-danger" asp-action="Delete"  asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to check if text_two is in text_one
+            function Contains(text_one, text_two) {
+                return text_one.indexOf(text_two) != -1;
+            }
+
+            $("#Search").keyup(function () {
+                var searchText = $("#Search").val().toLowerCase();
+                var selectedValue = $("#search-by").val();
+                var columnSelector = "td:nth-child(" + selectedValue + ")";
+
+                $(".Search").each(function () {
+
+                    var searchBy = $(this).find(columnSelector).text().toLowerCase();
+
+                    if (!Contains(searchBy, searchText)) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
+
+}
+
+else
+{
+
+    <h2>No Users Created Yet!</h2>
+
+    <span>Create new User <a class="btn btn-outline-primary" asp-action="Create">Create</a></span>
+}
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

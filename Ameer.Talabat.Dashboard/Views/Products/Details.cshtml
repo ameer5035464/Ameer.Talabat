@@ -1,0 +1,79 @@
+﻿@model ProductDetailsVM
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+	
+
+	<div class="page mt-5">
+		<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
+			<input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
+			<label for="tab1">General</label>
+
+			<input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+			<label for="tab2">Adminstration</label>
+
+			<ul>
+				<li class="tab-content tab-content-first typography float-start">
+					<div class="row mb-4">
+
+						<div class="col-6">
+							<img src="@Model.PictureUrl" class="rounded"/>
+						</div>
+
+						<div class="col-6">
+							<label asp-for="Name">Name</label>
+							<input asp-for="Name" class="form-control" type="text" aria-label="Disabled input example" disabled readonly>
+						</div>
+					</div>
+					<div class=" mb-4">
+						<label asp-for="Price">Price</label>
+						<input asp-for="Price" class="form-control" aria-label="Disabled input example" disabled readonly>
+					</div>
+					<div>
+						<label asp-for="Brand">Brand</label>
+						<input asp-for="Brand" class="form-control" aria-label="Disabled input example" disabled readonly>
+					</div>
+					<div>
+						<label asp-for="Category">Category</label>
+						<input asp-for="Category" class="form-control" aria-label="Disabled input example" disabled readonly>
+					</div>
+					<div>
+					<label asp-for="Description" >Description</label>
+					<input asp-for="Description" class="form-control" aria-label="Disabled input example" disabled readonly>
+					</div>
+				</li>
+
+
+				<li class="tab-content tab-content-2 typography float-start">
+
+					<div class=" mb-4">
+						<label asp-for="Id" for="By">Id</label>
+						<input asp-for="Id" class=" form-control" type="text" aria-label="Disabled input example" disabled readonly>
+					</div>
+					<div class=" mb-4">
+						<label asp-for="CreatedBy" for="By">Created By</label>
+						<input asp-for="CreatedBy" class=" form-control" type="text" aria-label="Disabled input example" disabled readonly>
+					</div>
+					<div class=" mb-4">
+						<label asp-for="CreatedOn" for="On">Created On</label>
+						<input asp-for="CreatedOn" class="form-control" type="datetime" aria-label="Disabled input example" disabled readonly>
+					</div>
+
+					<div class=" mb-4">
+						<label asp-for="LastModifiedBy" for="Last Modified By">Last Modified By</label>
+						<input asp-for="LastModifiedBy" class="form-control" type="text" aria-label="Disabled input example" disabled readonly>
+					</div>
+					<div>
+						<label asp-for="LastModifiedOn" for="ModefiedOn">Last Modefied On</label>
+						<input asp-for="LastModifiedOn" class="form-control" type="datetime" aria-label="Disabled input example" disabled readonly>
+					</div>
+				</li>
+			</ul>
+
+			<a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success px-5 py-2 mt-4">Edit</a>
+			<a asp-controller="Products" asp-action="Index" class="btn btn-danger ms-2 px-5 py-2 mt-4">Back</a>
+
+		</div>
+	</div>

@@ -1,0 +1,29 @@
+﻿@model EditRoleVM
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <link href="~/css/Edit.css" rel="stylesheet" />
+
+
+<div class="wrapper">
+    <form class="form-signin" method="post">
+        <input type="hidden" asp-for="id" />
+
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <h2 class="form-signin-heading">Edit Role</h2>
+        <span asp-validation-for="id" class="text-danger"></span>
+        <input asp-for="id" value="@Model.id" type="text1" class="form-control" disabled />
+
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Name" type="text2" class="form-control" />
+
+        <button class="btn btn-lg btn-primary btn-block button" type="submit">Update</button>
+    </form>
+
+
+
+</div>

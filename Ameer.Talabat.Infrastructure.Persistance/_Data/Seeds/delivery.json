@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 0,
+    "ShortName": "UPS1",
+    "Description": "Fastest delivery time",
+    "DeliveryTime": "1-2 Days",
+    "Cost": 10,
+    "CreatedBy": "ded93485-b788-4ba0-a511-e2899fdecf35",
+    "LastModifiedBy": "ded93485-b788-4ba0-a511-e2899fdecf35"
+  },
+  {
+    "Id": 0,
+    "ShortName": "UPS2",
+    "Description": "Get it within 5 days",
+    "DeliveryTime": "2-5 Days",
+    "Cost": 5,
+    "CreatedBy": "ded93485-b788-4ba0-a511-e2899fdecf35",
+    "LastModifiedBy": "ded93485-b788-4ba0-a511-e2899fdecf35"
+  },
+  {
+    "Id": 0,
+    "ShortName": "UPS3",
+    "Description": "Slower but cheap",
+    "DeliveryTime": "5-10 Days",
+    "Cost": 2,
+    "CreatedBy": "ded93485-b788-4ba0-a511-e2899fdecf35",
+    "LastModifiedBy": "ded93485-b788-4ba0-a511-e2899fdecf35"
+  },
+  {
+    "Id": 0,
+    "ShortName": "FREE",
+    "Description": "Free! You get what you pay for",
+    "DeliveryTime": "1-2 Weeks",
+    "Cost": 0,
+    "CreatedBy": "ded93485-b788-4ba0-a511-e2899fdecf35",
+    "LastModifiedBy": "ded93485-b788-4ba0-a511-e2899fdecf35"
+  }
+]

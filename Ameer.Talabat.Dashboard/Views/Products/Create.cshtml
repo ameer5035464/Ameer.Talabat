@@ -1,0 +1,58 @@
+﻿@model CreateEditProductVM
+
+
+<div class="container">
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="Image" class="col-form-label "></label>
+    <input asp-for="Image" type="file" class="form-control" />
+</div>
+<div class="form-group">
+    <label asp-for="Name" class="col-form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>         
+</div>
+<div class="form-group">
+    <label asp-for="Description" class="col-form-label"></label>
+    <input asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Price" class="col-form-label"></label>
+    <input asp-for="Price" class="form-control" type="number" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="col-form-label">Brand</label>
+    <select asp-for="BrandId" class="form-control">
+        <option value="@null">-- Select Brand --</option>
+        @foreach (var item in ViewBag.Brands)
+        {
+            <option value="@item.Id">@item.Name</option>
+
+        }
+    </select>
+</div>
+<div class="form-group">
+    <label class="col-form-label">Category</label>
+    <select asp-for="CategoryId" class="form-control">
+        <option value="@null">-- Select Category --</option>
+        @foreach (var item in ViewBag.Categories)
+        {
+            <option value="@item.Id">@item.Name</option>
+
+        }
+    </select>
+</div>
+
+<div class="form-group mt-3">
+      <input type="submit" value="Add" class="btn btn-primary" />
+      <a asp-action="Index" class="btn btn-light">Back To Product List</a>
+</div>
+
+
+</form>
+
+</div>
